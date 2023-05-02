@@ -4,9 +4,9 @@
 {% block header %}
 <script type="text/javascript">
   let wasKeyboard = false;
-  document.addEventListener("mousedown", function () { wasKeyboard = false; });
-  document.addEventListener("keydown", function () { wasKeyboard = true; });
-  document.addEventListener("focusin", function () {
+  document.addEventListener("mousedown", function() { wasKeyboard = false; });
+  document.addEventListener("keydown", function() { wasKeyboard = true; });
+  document.addEventListener("focusin", function() {
     if (wasKeyboard) {
       document.body.classList.add("keyboard-focus");
     } else {
@@ -15,12 +15,9 @@
   });
 </script>
 <style type="text/css">
-  {
-    % include "sso.css" without context %
-  }
+  {% include "sso.css" without context %}
 
-  body.keyboard-focus :focus,
-  body.keyboard-focus .username_input:focus-within {
+  body.keyboard-focus :focus, body.keyboard-focus .username_input:focus-within {
     outline: 3px solid #17191C;
     outline-offset: 4px;
   }
@@ -40,13 +37,11 @@
     border-color: #FE2928;
   }
 
-  .username_input.invalid input,
-  .username_input.invalid label {
+  .username_input.invalid input, .username_input.invalid label {
     color: #FE2928;
   }
 
-  .username_input div,
-  .username_input input {
+  .username_input div, .username_input input {
     line-height: 18px;
     font-size: 14px;
   }
@@ -95,7 +90,6 @@
     padding: 12px;
     display: block;
   }
-
   .idp-pick-details .check-row {
     display: flex;
     align-items: center;
@@ -105,8 +99,7 @@
     flex: 1;
   }
 
-  .idp-pick-details .use,
-  .idp-pick-details .idp-value {
+  .idp-pick-details .use, .idp-pick-details .idp-value {
     color: #737D8C;
   }
 
@@ -144,16 +137,14 @@
     <div class="username_input" id="username_input">
       <label for="field-username">Username (required)</label>
       <div class="prefix">@</div>
-      <input type="text" name="username" id="field-username" value="{{ user_attributes.localpart }}" autofocus
-        autocorrect="off" autocapitalize="none">
+      <input type="text" name="username" id="field-username" value="{{ user_attributes.localpart }}" autofocus autocorrect="off" autocapitalize="none">
       <div class="postfix">:{{ server_name }}</div>
     </div>
     <output for="username_input" id="field-username-output"></output>
     <input type="submit" value="Continue" class="primary-button">
     {% if user_attributes.avatar_url or user_attributes.display_name or user_attributes.emails %}
     <section class="idp-pick-details">
-      <h2>{% if idp.idp_icon %}<img src="{{ idp.idp_icon | mxc_to_http(24, 24) }}" />{% endif %}Optional data from {{
-        idp.idp_name }}</h2>
+      <h2>{% if idp.idp_icon %}<img src="{{ idp.idp_icon | mxc_to_http(24, 24) }}"/>{% endif %}Optional data from {{ idp.idp_name }}</h2>
       {% if user_attributes.avatar_url %}
       <label class="idp-detail idp-avatar" for="idp-avatar">
         <div class="check-row">
